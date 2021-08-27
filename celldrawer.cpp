@@ -1193,7 +1193,7 @@ void celldrawer::set_land_floor(const shiftmatrix& Vf) {
       set_floor(cgi.shFullFloor);
       break;
     
-    case laPalace: case laTerracotta:
+    case laPalace: case laCellar: case laTerracotta:
       set_floor(cgi.shPalaceFloor);
       break;
     
