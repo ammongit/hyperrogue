@@ -2111,7 +2111,7 @@ EX void giantLandSwitch(cell *c, int d, cell *from) {
         }
       if(d == 7 && !c->monst && !c->wall && !safety) {
         if(!c->item) {
-          if (hrand_monster(6000) < 6 + items[itCellar] + yendor::hardness())
+          if (hrand_monster(6000) < 6 + items[itCellar] + yendor::hardness() / 2)
             c->monst = moFatGuard;
             c->hitpoints = 3;
           }
