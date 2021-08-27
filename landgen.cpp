@@ -2109,13 +2109,6 @@ EX void giantLandSwitch(cell *c, int d, cell *from) {
           c->wall = waCTree;
           }
         }
-      if(d == 8) {
-        if(hrand_monster(100) == 0 && !c->monst && !c->wall && !safety && !isPlayerOn(c)) {
-          bool placeIvy = true;
-          forCellEx(c2, c) if (c2->monst || c2->wall || c2->item || isPlayerOn(c2)) placeIvy = false;
-          if (placeIvy) buildIvy(c, 0, 3);
-          }
-        }
       if(d == 7 && !c->monst && !c->wall && !safety) {
         if(!c->item) {
           if (hrand_monster(6000) < 6 + items[itCellar] + yendor::hardness())
