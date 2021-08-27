@@ -2109,7 +2109,8 @@ EX void giantLandSwitch(cell *c, int d, cell *from) {
           // TODO
 
           // TODO treasure under barrels
-          if(hrand(1500) < PT(100 + kills[moPalace] + kills[moFatGuard], 200) && notDippingFor(itCellar)) {
+          if(hrand(1500) < PT(20 + kills[moPalace] + kills[moFatGuard], 100) && notDippingFor(itCellar)) {
+            // TODO make kills appear as increasing treasure spawn
             c->item = itCellar;
           }
         } else {
@@ -2121,11 +2122,20 @@ EX void giantLandSwitch(cell *c, int d, cell *from) {
       }
       if(d == 7 && !c->monst && !c->wall && !safety) {
         if(!c->item) {
-          if (hrand_monster(6000) < 6 + items[itCellar] + yendor::hardness() / 2)
-            c->monst = moFatGuard;
+          if (hrand_monster(6000) < 6 + items[itCellar] + yendor::hardness() / 3) {
+            int regularGuardChance;
+            if(items[itCellar] >= 15)
+              regularGuardChance = 60;
+            else if(items[itCellar] >= 5)
+              regularGuardChance = 40;
+            else
+              regularGuardChance = 5;
+
+            c->monst = hrand(100) < regularGuardChance ? moPalace : moFatGuard;
             c->hitpoints = 3;
           }
         }
+      }
       #endif
       break;
 

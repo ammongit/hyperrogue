@@ -591,14 +591,7 @@ EX void wandering() {
 
     /* TODO: add "noise" mechanic */
     else if (c->land == laCellar && wchance(items[itCellar], 50)) {
-      int regularGuardChance;
-      if(items[itCellar] >= 15)
-        regularGuardChance = 60;
-      else if(items[itCellar] >= 5)
-        regularGuardChance = 40;
-      else
-        regularGuardChance = 5;
-
+      const int regularGuardChance = items[itCellar] > 5 ? 40 : 20;
       c->monst = hrand(100) < regularGuardChance ? moPalace : moFatGuard;
       c->hitpoints = 3;
     }
