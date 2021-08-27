@@ -1729,8 +1729,8 @@ MONSTER('d', 0x901020, "Angry Die", moAngryDie, ZERO, RESERVED, moAnimatedDie,
   "You have made a die unhappy. Taste the revenge! This one won't forgive you, no matter what you do."
   )
 
-LAND(0x7A5020, "Cellar", laCellar, ZERO, itCellar, RESERVED,
-  "The sprawling storage annex of the Palace, where items, both valuable and not, are kept."
+LAND(0x665500, "Cellar", laCellar, ZERO, itCellar, RESERVED,
+  "The sprawling storage annex of the Palace, where items, both valuable and not, are kept. "
   "Sneak around and steal treasure, but be quiet so as to not alert the guards!\n\n"
   "Only appears adjacent to a Palace or Crossroads."
   )

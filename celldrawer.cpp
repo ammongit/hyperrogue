@@ -317,8 +317,7 @@ void celldrawer::setcolors() {
     case laCellar:
       // TODO
       fcol = floorcolors[c->land];
-      if(pseudohept(c)) fcol = fcol * 3/4;
-      if(c->wall == waCTree) wcol = 0x008090;
+      if(pseudohept(c)) fcol = 0x443800;
       break;
 
     case laIvoryTower:
