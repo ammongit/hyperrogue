@@ -2105,10 +2105,20 @@ EX void giantLandSwitch(cell *c, int d, cell *from) {
     case laCellar:
       #if CAP_COMPLEX2
       if(fargen) {
-        if((S7 == 7) ? (zebra3(c) == 3) : (hrand(8) == 0)) {
-          c->wall = waCTree;
+        if(S7 == 7) {
+          // TODO
+
+          // TODO treasure under barrels
+          if(hrand(1500) < PT(100 + kills[moPalace] + kills[moFatGuard], 200) && notDippingFor(itCellar)) {
+            c->item = itCellar;
+          }
+        } else {
+          // Fallback for other geometries
+          if (hrand(8) == 0) {
+            c->wall = waSmallTree;
           }
         }
+      }
       if(d == 7 && !c->monst && !c->wall && !safety) {
         if(!c->item) {
           if (hrand_monster(6000) < 6 + items[itCellar] + yendor::hardness() / 2)
