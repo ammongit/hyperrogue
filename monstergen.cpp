@@ -600,6 +600,7 @@ EX void wandering() {
         regularGuardChance = 5;
 
       c->monst = hrand(100) < regularGuardChance ? moPalace : moFatGuard;
+      c->hitpoints = 3;
     }
 
     else if(c->land == laDesert && wchance(items[itSpice], 10))
