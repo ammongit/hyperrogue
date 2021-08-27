@@ -1731,8 +1731,7 @@ MONSTER('d', 0x901020, "Angry Die", moAngryDie, ZERO, RESERVED, moAnimatedDie,
 
 LAND(0x665500, "Cellar", laCellar, ZERO, itCellar, RESERVED,
   "The sprawling storage annex of the Palace, where items, both valuable and not, are kept. "
-  "Sneak around and steal treasure, but be quiet so as to not alert the guards!\n\n"
-  "Only appears adjacent to a Palace or Crossroads."
+  "Sneak around and steal treasure, but be quiet so as to not alert the guards!"
   )
   NATIVE(m == moPalace || m == moFatGuard)
   REQ(ITEMS(itPalace, U10))
