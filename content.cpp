@@ -1725,35 +1725,21 @@ MONSTER('d', 0x603010, "Animated Die", moAnimatedDie, ZERO, RESERVED, moAnimated
   "Other rolls and attacks are not allowed."
   )
 
-MONSTER('d', 0x901020, "Angry Die", moAngryDie, ZERO, RESERVED, moAnimatedDie, 
+MONSTER('d', 0x901020, "Angry Die", moAngryDie, ZERO, RESERVED, moAnimatedDie,
   "You have made a die unhappy. Taste the revenge! This one won't forgive you, no matter what you do."
   )
 
-LAND( 0x00C000, "Tines Forest", laTines, ZERO, itTines, RESERVED,
-    "Treasures are found guarded by two Tines, while Orbs of Slashing/Triangle/Ferocity are found guarded by at least three."
-    )
-  NATIVE((isIvy(m) || m == moTineGuard || m == moTine || m == moBirdBlight) ? 1 : 0)
-  REQ(ITEMS(itHunting, U10) ITEMS(itRuby, U10))
+LAND(0x7A5020, "Cellar", laCellar, ZERO, itCellar, RESERVED,
+  "The sprawling storage annex of the Palace, where items, both valuable and not, are kept."
+  "Sneak around and steal treasure, but be quiet so as to not alert the guards!\n\n"
+  "Only appears adjacent to a Palace or Crossroads."
+  )
+  NATIVE(m == moPalace || m == moFatGuard)
+  REQ(ITEMS(itPalace, U10))
 
-ITEM( '%', 0x40E0D0, "Ivy Tesseract", itTines, IC_TREASURE, ZERO, RESERVED, osNone,
-    "This Ivy couldn't find any safe directions to expand, so it invented a new dimension to grow into instead."
-    )
-
-ITEM( 'o', 0x40C000, "Orb of Growth", itOrbGrowth, IC_ORB, ZERO | IF_RANGED, RESERVED, osRanged,
-    "This Orb allows you to grow Ivy or Trees from a cell neighboring the target. Each use drains 10 charges."
- )
-
-MONSTER( 'W', 0xAAAAAA, "Tine (Guarding)", moTineGuard, CF_FACE_SIDE | CF_SPAM, RESERVED, moYeti,
-    "These dog-like creatures usually stay still except to defend against encroaching Ivies and Blight Birds.\n\n"
-    "If you pick up certain items within distance 2 of a Guarding Tine, it will become angry and start to chase you. The guarded items are:\n  * Ivy Tesseract\n  * Orb of Slashing\n  * Orb of the Triangle\n  * Orb of Ferocity"
-    )
-MONSTER( 'W', 0xDDDDDD, "Tine", moTine, CF_FACE_SIDE, RESERVED, moYeti,
-    "This tine has become angry!"
-    )
-
-MONSTER( 'B', 0xDD00DD, "Blight Bird", moBirdBlight, CF_FACE_SIDE | CF_BIRD | CF_FLYING | CF_IGNORE_PLATE | CF_NONLIVING, RESERVED, moEagle,
-    "When a Blight Bird dies, adjacent plants and treasures are destroyed, and adjacent Orbs are corrupted."
-    )
+ITEM('!', 0xDB8020, "Hypersian Ale", itCellar, IC_TREASURE, ZERO, RESERVED, osNone,
+  "This rich ale was fermented in hyperbolic barrels, and flavored with root from the Mutant Ivy."
+  )
 
 //shmupspecials
 MONSTER( '@', 0xC0C0C0, "Rogue", moPlayer, CF_FACE_UP | CF_PLAYER, RESERVED, moNone, "In the Shoot'em Up mode, you are armed with thrown Knives.")

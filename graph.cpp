@@ -1579,17 +1579,16 @@ EX bool drawMonsterType(eMonster m, cell *where, const shiftmatrix& V1, color_t 
       queuepoly(VAHEAD, cgi.shWolfEyes, 0xFF0000FF);
       return true;
       }
-    
+
     case moMouse: case moMouseMoved: {
       queuepoly(VALEGS, cgi.shMouse, darkena(col, 0, 0xFF));
       queuepoly(VALEGS, cgi.shMouseLegs, darkena(col, 1, 0xFF));
       queuepoly(VALEGS, cgi.shMouseEyes, 0xFF);
       return true;
       }
-    
-    case moRunDog: case moHunterDog: case moHunterGuard: case moHunterChanging: case moFallingDog:
-    case moTineGuard: case moTine: {
-      if(!mmspatial && !footphase) 
+
+    case moRunDog: case moHunterDog: case moHunterGuard: case moHunterChanging: case moFallingDog: {
+      if(!mmspatial && !footphase)
         queuepoly(VABODY, cgi.shDogBody, darkena(col, 0, 0xFF));
       else {
         ShadowV(V, cgi.shDogTorso);
@@ -1597,17 +1596,16 @@ EX bool drawMonsterType(eMonster m, cell *where, const shiftmatrix& V1, color_t 
         animallegs(VALEGS, moRunDog, m == moFallingDog ? 0xFFFFFFFF : darkena(col, 0, 0xFF), footphase);
         }
       queuepoly(VAHEAD, cgi.shDogHead, darkena(col, 0, 0xFF));
-  
+
       {
       dynamicval<color_t> dp(poly_outline);
       int eyecolor = 0x202020;
       bool redeyes = false;
-      if(m == moHunterDog || m == moTine) eyecolor = 0xFF0000, redeyes = true;
+      if(m == moHunterDog) eyecolor = 0xFF0000, redeyes = true;
       if(m == moHunterGuard) eyecolor = 0xFF6000, redeyes = true;
-      if(m == moTineGuard) eyecolor = 0x202020, redeyes = true;
       if(m == moHunterChanging) eyecolor = 0xFFFF00, redeyes = true;
       int eyes = darkena(eyecolor, 0, 0xFF);
-  
+
       if(redeyes) poly_outline = eyes;
       queuepoly(VAHEAD, cgi.shWolf1, eyes).flags |= POLY_FORCEWIDE;
       queuepoly(VAHEAD, cgi.shWolf2, eyes).flags |= POLY_FORCEWIDE;
@@ -1644,7 +1642,7 @@ EX bool drawMonsterType(eMonster m, cell *where, const shiftmatrix& V1, color_t 
 
     case moEagle: case moParrot: case moBomberbird: case moAlbatross:
     case moTameBomberbird: case moWindCrow: case moTameBomberbirdMoved:
-    case moSandBird: case moAcidBird: case moBirdBlight: {
+    case moSandBird: case moAcidBird: {
       ShadowV(V, cgi.shEagle);
       auto& sh = GDIM == 3 ? cgi.shAnimatedEagle[wingphase(200)] : cgi.shEagle;
       if(m == moParrot && GDIM == 3)
@@ -4107,7 +4105,6 @@ EX int ceiling_category(cell *c) {
     case laRedRock:
     case laZebra:
     case laHunting:
-    case laTines:
     case laEAir:
     case laStorms:
     case laMountain:
@@ -4598,8 +4595,6 @@ EX void drawMarkers() {
       }
     else if(orbToTarget) {
       queuestr(mousex, mousey, 0, vid.fsize, "@", iinf[orbToTarget].color);
-      if (orbToTarget == itOrbGrowth)
-        queuecircleat(mouseover->move(growth_which(mouseover)), 0.6, darkena(0x00FFFF, 0, 0xFF));
       queuecircleat(mouseover, 0.6, darkena(iinf[orbToTarget].color, 0, 0xFF));
       }
     #endif

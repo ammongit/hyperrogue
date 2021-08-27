@@ -589,8 +589,18 @@ EX void wandering() {
     else if(c->land == laHunting && wchance(items[itHunting], 50, 26))
       c->monst = moHunterDog;
 
-    else if(c->land == laTines && wchance(items[itTines], 10))
-      c->monst = moBirdBlight;
+    /* TODO: add "noise" mechanic */
+    else if (c->land == laCellar && wchance(items[itCellar], 50)) {
+      int regularGuardChance;
+      if(items[itCellar] >= 15)
+        regularGuardChance = 60;
+      else if(items[itCellar] >= 5)
+        regularGuardChance = 40;
+      else
+        regularGuardChance = 5;
+
+      c->monst = hrand(100) < regularGuardChance ? moPalace : moFatGuard;
+    }
 
     else if(c->land == laDesert && wchance(items[itSpice], 10))
       c->monst = (hrand(10) || peace::on) ? moDesertman : moWorm;

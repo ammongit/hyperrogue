@@ -116,11 +116,8 @@ EX bool collectItem(cell *c2, cell *last, bool telekinesis IS(false)) {
   if(c2->land == laHunting && c2->item && !inv::activating) {
     ambush::ambush(c2, ambush::size(c2, c2->item));
     }
-  if(tines::guard_item(c2)) {
-    tines::wake_near(c2);
-    }
   #endif
-  
+
   if(isRevivalOrb(c2->item) && multi::revive_queue.size()) {
     multiRevival(last, c2);
     }

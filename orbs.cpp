@@ -168,7 +168,6 @@ EX void reduceOrbPowers() {
   reduceOrbPower(itOrbThorns, 150);
   reduceOrbPower(itOrbWater, 150);
   reduceOrbPower(itOrbAir, 150);
-  reduceOrbPower(itOrbGrowth, 150);
   reduceOrbPower(itOrbFrog, 77);
   reduceOrbPower(itOrbDash, 77);
   reduceOrbPower(itOrbPhasing, 77);
@@ -785,13 +784,7 @@ void telekinesis(cell *dest) {
   if(dest->wall == waGlass) {
     drainOrb(itOrbSpace);
     addMessage(XLAT("Your power is drained by %the1!", dest->wall));
-    }    
-
-  #if CAP_COMPLEX2
-  if(tines::guard_item(dest)) {
-    tines::wake_near(dest);
     }
-  #endif
 
   moveItem(dest, cwt.at, true);
   collectItem(cwt.at, cwt.at, true);
@@ -918,7 +911,6 @@ EX eMonster summonedAt(cell *dest) {
     if(dest->land == laBrownian) return moAcidBird;
     if(dest->land == laVariant) return moFireElemental;
     if(dest->land == laWestWall) return moAirElemental;
-    if(dest->land == laTines) return moBirdBlight;
     if(isHaunted(dest->land)) return moGhost;
     }
   return moNone;
@@ -1154,7 +1146,6 @@ void blowoff(const movei& mi) {
 
 void useOrbOfDragon(cell *c) {
   makeflame(c, 20, false);
-  if(c->monst == moTineGuard) c->monst = moTine;
   playSound(c, "fire");
   addMessage(XLAT("You throw fire!"));
   useupOrb(itOrbDragon, 5);
@@ -1245,32 +1236,6 @@ EX int growth_which(cell *c) {
       if(c2->wall == w)
         return i;
   return NODIR;
-  }
-
-void growth_grow(cell *c, int fromdir) {
-  movei mi(c, fromdir);
-  cell *cf = mi.t;
-  if(among(cf->monst, moMutant, moIvyHead, moIvyRoot, moIvyBranch, moIvyWait)) {
-    animateMovement(mi.rev(), LAYER_BIG);
-    c->mondir = fromdir;
-    if(cf->monst == moMutant) {
-      c->monst = moMutant;
-      c->stuntime = (cf->stuntime + 1) & 15;
-      }
-    else if(cf->monst == moIvyHead) {
-      c->monst = moIvyHead;
-      cf->monst = moIvyBranch;
-      }
-    else {
-      c->monst = moIvyWait;
-      }
-    }
-  else {
-    c->wall = cf->wall;
-    }
-  useupOrb(itOrbGrowth, 10);
-  bfs();
-  checkmoveO();
   }
 
 EX void apply_impact(cell *c) {
@@ -1635,20 +1600,8 @@ EX eItem targetRangedOrb(cell *c, orbAction a) {
     return itOrbDragon;
     }
 
-  // growth
-  if(items[itOrbGrowth] &&
-    CHK(!c->monst, XLAT("Cannot cause growth on a monster!")) &&
-    CHK(!c->item, XLAT("Cannot cause growth on an item!")) &&
-    CHK(among(c->wall, waNone, waCIsland, waCIsland2, waCanopy), XLAT("Cannot cause growth on the %1!", c->wall))) {
-    int fromdir = growth_which(c);
-    if(CHK(fromdir != NODIR, XLAT("No plants can grow here from adjacent cells!"))) {
-      if (!isCheck(a)) growth_grow(c, fromdir), apply_impact(c);
-      return itOrbGrowth;
-      }
-    }
-  
   if(isWeakCheck(a)) return itNone;
-  
+
   for(string s: orb_error_messages) addMessage(s);
 
   if(wouldkill_there)
@@ -1720,7 +1673,6 @@ EX int orbcharges(eItem it) {
     case itOrbDigging:
     case itOrbTeleport:
     case itOrbMagnetism:
-    case itOrbGrowth:
       return 77;
     case itOrbDomination:
       return 90;

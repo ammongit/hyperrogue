@@ -169,7 +169,8 @@ EX vector<orbinfo> orbinfos = {
   {orbgenflags::S_NATIVE, laCursed, 400, 1500, itOrbPurity},
   {orbgenflags::S_NAT_NT, laDice, 500, 800, itOrbLuck},
   {orbgenflags::S_GUEST, laDice, 750, 0, itOrbAir},
-  {orbgenflags::S_NATIVE, laTines, 1200, 1500, itOrbGrowth},
+  {orbgenflags::S_GUEST, laCellar, 500, 0, itOrbInvis},
+  {orbgenflags::S_GUEST, laCellar, 800, 0, itOrbDiscord},
   {orbgenflags::S_NATIVE, laWhirlpool, 0, 2000, itOrbWater}, // needs to be last
   };
 
@@ -255,11 +256,6 @@ EX eOrbLandRelation getOLR(eItem it, eLand l) {
   if(it == itOrbIllusion && l == laCamelot) return olrNative1;
   if(it == itOrbLove) return olrNoPrizeOrb;    
   if(nativeOrbType(l) == it) return olrNative;
-  
-  if(l == laTines && (it == itOrbSide1 || it == itOrbSide2 || it == itOrbSide3))
-    return olrAlways;
-  if(l == laTines && it == itGreenStone)
-    return olrMonster;
 
   for(const orbinfo& oi: orbinfos)
     if((oi.flags & orbgenflags::GUEST) && oi.l == l && oi.orb == it)
@@ -339,15 +335,9 @@ EX eOrbLandRelation getOLR(eItem it, eLand l) {
 
   if(it == itOrbWoods && !among(l,
     laDryForest, laWineyard, laCaribbean, laOvergrown, laHaunted, laHauntedWall, laHauntedBorder, laTortoise, laFrog, laEclectic,
-    laVariant, laBull, laTines))
+    laVariant, laBull))
     return olrUseless;
   
-  if(it == itOrbGrowth && !among(l,
-    laDryForest, laWineyard, laCaribbean, laOvergrown, laHaunted, laHauntedWall, laHauntedBorder, laTortoise, laFrog, laEclectic,
-    laVariant, laBull, laTines,
-    laEndorian, laMountain, laJungle, laRlyeh, laRose
-    ))
-    return olrUseless;
 
   if(it == itShard) {
     if(l == laDesert || l == laIce || l == laJungle || l == laGraveyard ||

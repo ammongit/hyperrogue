@@ -457,7 +457,7 @@ EX eLand getNewLand(eLand old) {
     laStorms, laWhirlwind, laOvergrown, laBlizzard, laDryForest, laWineyard, laVolcano,
     laDeadCaves, laRedRock, laVariant, laHell, laCocytus, laPower,
     laBull, laTerracotta, laRose, laGraveyard, laHive, laDragon, laTrollheim,
-    laWet, laFrog, laEclectic, laCursed, laDice, laTines,
+    laWet, laFrog, laEclectic, laCursed, laDice, laCellar,
     laCrossroads5,
     })
     if(landUnlocked(l)) tab[cnt++] = l;    
@@ -468,13 +468,13 @@ EX eLand getNewLand(eLand old) {
     int f1;
     int f2;
     };
-  
-  for(clos c: { 
+
+  for(clos c: {
     clos{laZebra, laMotion, 2, 2}, {laZebra, laHunting, 2, 2},
-    {laTines, laHunting, 3, 3}, {laTines, laJungle, 3, 3}, {laTines, laTerracotta, 3, 3},
     {laDragon, laReptile, 5, 5},
     {laVariant, laRuins, 5, 5}, {laVariant, laEmerald, 5, 5}, {laVariant, laGraveyard, 5, 5},
     {laPalace, laDungeon, 5, 0},
+    {laPalace, laCellar, 5, 0},
     {laJungle, laOvergrown, 5, 5},
     {laIce, laBlizzard, 5, 5}, {laCocytus, laBlizzard, 5, 5}, {laHell, laCocytus, 5, 5}, {laIce, laCocytus, 5, 5},
     {laWhirlwind, laBlizzard, 5, 5},
@@ -563,14 +563,14 @@ EX eLand getNewLand(eLand old) {
 EX vector<eLand> land_over = {
   laIce, laCaves, laDesert, laHunting, laMotion, laJungle, laAlchemist, 
   laCrossroads, 
-  laMirror, laMirrorOld, laMinefield, laPalace, laPrincessQuest, laZebra, laSwitch, laReptile, laWet,
+  laMirror, laMirrorOld, laMinefield, laPalace, laPrincessQuest, laCellar, laZebra, laSwitch, laReptile, laWet,
   laOcean, laDocks, laWarpCoast, laLivefjord, laKraken, laCaribbean, laBrownian, laWhirlpool, laRlyeh, laTemple,
   laIvoryTower, laEndorian, laWestWall, laDungeon, laMountain, 
   laCrossroads2, 
   laDryForest, laWineyard, laDeadCaves, laGraveyard, laHaunted, laHive, 
   laRedRock, laVolcano,
   laDragon, laTortoise, laDice,
-  laTines, laOvergrown, laClearing, laStorms, laBurial, laWhirlwind,
+  laOvergrown, laClearing, laStorms, laBurial, laWhirlwind,
   laBlizzard,
   laFrog, laEclectic, laCursed,
   laRuins, laEmerald, laVariant, laCamelot, 

@@ -249,15 +249,15 @@ EX bool eternalFire(cell *c) {
   return c->land == laDryForest || (c->land == laPower && !smallbounded) || c->land == laMinefield ||
     c->land == laEFire || c->land == laElementalWall;
   }
-  
+
 EX bool haveRangedOrb() {
-  return 
+  return
     items[itOrbPsi] || items[itOrbDragon] || items[itOrbTeleport] ||
     items[itOrbIllusion] || items[itOrbSpace] || items[itOrbAir] ||
     items[itOrbFrog] || items[itOrbSummon] || items[itOrbMatter] ||
     items[itRevolver] || items[itOrbStunning] || items[itStrongWind] ||
     items[itOrbDomination] || items[itOrbNature] || items[itOrbDash] ||
-    items[itOrbMorph] || items[itOrbPhasing] || items[itOrbGrowth];
+    items[itOrbMorph] || items[itOrbPhasing];
   }
 
 EX bool isFriendlyGhost(eMonster m) {

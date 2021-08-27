@@ -314,20 +314,21 @@ void celldrawer::setcolors() {
       if(pseudohept(c)) fcol = fcol * 3/4;
       break;
 
-    case laTines:
+    case laCellar:
+      // TODO
       fcol = floorcolors[c->land];
       if(pseudohept(c)) fcol = fcol * 3/4;
       if(c->wall == waCTree) wcol = 0x008090;
       break;
-  
+
     case laIvoryTower:
       fcol = 0x10101 * flip_dark(c->landparam, 32, 64) - 0x000010;
       break;
-    
+
     case laWestWall:
       fcol = 0x10101 * flip_dark(c->landparam, 0, 32) + floorcolors[c->land];
       break;
-    
+
     case laDungeon: {
       int lp = c->landparam % 5;
         // xcol = (c->landparam&1) ? 0xD00000 : 0x00D000;

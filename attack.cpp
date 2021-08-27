@@ -58,7 +58,6 @@ int* killtable[] = {
     &kills[moFallingDog], &kills[moVariantWarrior], &kills[moWestHawk],
     &kills[moPike], &kills[moRusalka], &kills[moFrog], &kills[moPhaser], &kills[moVaulter],
     &kills[moHexer], &kills[moAnimatedDie], &kills[moAngryDie],
-    &kills[moTine], &kills[moTineGuard], &kills[moBirdBlight],
     NULL
     };
 
@@ -401,43 +400,13 @@ EX void minerEffect(cell *c) {
   else if(isReptile(c->wall))
     c->wparam = 1; // wake up next turn
   else if(c->wall == waTempFloor) c->wall = waChasm;
-  else if(c->wall == waTempBridge || c->wall == waPetrifiedBridge || c->wall == waTempBridgeBlocked) 
+  else if(c->wall == waTempBridge || c->wall == waPetrifiedBridge || c->wall == waTempBridgeBlocked)
     placeWater(c, NULL);
   else if(doesFall(c))
     ow = waNone;
   else
     c->wall = waNone;
   if(c->wall != ow && ow) drawParticles(c, winf[ow].color, 16);
-  } 
-
-EX void blightEffect(cell *c) {
-  changes.ccell(c);
-
-  if(isAnyIvy(c->monst) || c->monst == moVineBeast) {
-    killMonster(c, moBirdBlight);
-    }
-  if (destroyHalfvine(c)) {
-    }
-  else if(among(c->wall, waVinePlant, waCTree, waBigTree, waSmallTree, waShrub, waRose, waBigBush, waSmallBush, waSolidBranch, waWeakBranch)) {
-    drawParticles(c, winf[c->wall].color, 16);
-    c->wall = waNone;
-    }
-  if(itemclass(c->item) == IC_TREASURE) {
-    drawParticles(c, iinf[c->item].color, 16);
-    c->item = itNone;
-    }
-  else if(itemclass(c->item) == IC_ORB && !(classflag(c->item) & IF_CURSE) && c->item != itGreenStone) {
-    drawParticles(c, iinf[c->item].color, 16);
-    eItem curse = curse_opposite_orb(c->item);
-    if(curse) {
-      addMessage(XLAT("%The1 is corrupted into a %2!", c->item, curse));
-      c->item = curse;
-      }
-    else {
-      addMessage(XLAT("%The1 is drained of its power!", c->item));
-      c->item = itGreenStone;
-      }
-    }
   }
 
 EX void killMutantIvy(cell *c, eMonster who) {
@@ -630,13 +599,6 @@ EX void killMonster(cell *c, eMonster who, flagtype deathflags IS(0)) {
       if(c2->wall == waDeadwall) c2->wall = waDeadfloor2;
       if(c2->wall == waExplosiveBarrel) explodeBarrel(c2);
       }
-    }
-  if(m == moBirdBlight && !checkOrb(who, itOrbStone)) {
-    pcount = 0;
-    playSound(c, "splash" + pick12());
-    blightEffect(c);
-    forCellEx(c1, c)
-      blightEffect(c1);
     }
   if(m == moOrangeDog) {
     if(pcount) for(int i=0; i<8; i++) {

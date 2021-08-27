@@ -915,11 +915,7 @@ EX void applyBoxes() {
   applyBoxI(itCurseWater, true);
   list_invorb();
 
-  applyBoxI(itTines);
-  applyBoxOrb(itOrbGrowth);
-  applyBoxM(moTineGuard);
-  applyBoxM(moTine);
-  applyBoxM(moBirdBlight);
+  applyBoxI(itCellar);
   list_invorb();
 
   if(POSSCORE != boxid) printf("ERROR: %d boxes\n", boxid);
